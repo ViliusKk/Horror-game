@@ -9,9 +9,11 @@ public class Flashlight : MonoBehaviour
     public float battery = 40;
     Light spotlight;
     float batteryTimer;
+    AudioSource audioSource;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         spotlight = GetComponentInChildren<Light>();
         spotlight.enabled = false;
 
@@ -23,6 +25,7 @@ public class Flashlight : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F) && battery > 50)
         {
             spotlight.enabled = !spotlight.enabled;
+            audioSource.Play();
         }
 
         if (spotlight.enabled) batteryTimer += Time.deltaTime;
