@@ -9,12 +9,23 @@ public class Enemy : MonoBehaviour
     public int scareDistance = 3;
     public Transform target;
     public Image scaryImage;
-    NavMeshAgent agent;
     public int viewDistance = 10;
+    public int patrolDistance = 5;
+    NavMeshAgent agent;
+    Vector3 randomDestination;
+
+    float timer;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        InvokeRepeating(nameof(RandomDestination), 3f, 3f);
+        randomDestination = transform.position;
+    }
+
+    void RandomDestination()
+    {
+        randomDestination += Random.insideUnitSphere * patrolDistance;
     }
 
     void OnDrawGizmos()
@@ -25,6 +36,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        timer += Time.deltaTime;
         //agent.SetDestination(target.position);
 
         float distance = Vector3.Distance(transform.position, target.position);
@@ -34,6 +46,20 @@ public class Enemy : MonoBehaviour
         {
             agent.SetDestination(target.position);
         }
+        else
+        {
+            agent.SetDestination(randomDestination);
+            //if(timer >= 3)
+            //{
+            //    timer = 0;
+            //    float ranX = Random.Range(-5f, 5f);
+            //    float ranY = Random.Range(-5f, 5f);
+
+            //    Vector3 ranPos = new Vector3(transform.position.x - ranX, transform.position.y - ranY, 0);
+            //    agent.SetDestination(ranPos);
+            //}
+        }
+
         if (distance < scareDistance)
         {
             Jumpscare();
