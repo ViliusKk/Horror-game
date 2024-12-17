@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     public int scareDistance = 3;
     public Transform target;
     public Image scaryImage;
-    public int viewDistance = 5;
+    public int viewDistance = 10;
     public int patrolDistance = 5;
     NavMeshAgent agent;
     Vector3 randomDestination;
@@ -25,7 +25,8 @@ public class Enemy : MonoBehaviour
 
     void RandomDestination()
     {
-        randomDestination += Random.insideUnitSphere * patrolDistance;
+        randomDestination.x += Random.Range(-1f,1f) * patrolDistance;
+        randomDestination.y += Random.Range(-1f, 1f) * patrolDistance;
     }
 
     void OnDrawGizmos()
@@ -72,26 +73,30 @@ public class Enemy : MonoBehaviour
         scaryImage.gameObject.SetActive(true);
     }
 
-    int countCollects = 0;
-    public void HarderAI()
+    public void HarderAI(int pagesCollected)
     {
-        countCollects++;
-        if (countCollects == 1)
+        print(pagesCollected);
+        if (pagesCollected == 1)
         {
-            viewDistance *= 2;
-            patrolDistance *= 2;
+            viewDistance = 20;
+            patrolDistance = 10;
+            agent.speed += 0.5f;
         }
-        else if(countCollects == 2)
+        else if(pagesCollected == 2)
         {
-
+            viewDistance = 30;
+            agent.speed += 1;
         }
-        else if(countCollects == 3)
+        else if(pagesCollected == 3)
         {
-
+            viewDistance = 40;
+            patrolDistance = 20;
+            agent.speed += 1;
         }
         else
         {
-
+            viewDistance = 50;
+            agent.speed += 0.5f;
         }
     }
 }

@@ -17,7 +17,7 @@ public class Flashlight : MonoBehaviour
         spotlight = GetComponentInChildren<Light>();
         spotlight.enabled = false;
 
-        batteryText.text = battery.ToString();
+        batteryText.text = $"Battery: {battery.ToString()}";
     }
 
     void Update()
@@ -32,7 +32,7 @@ public class Flashlight : MonoBehaviour
         if(batteryTimer >= 5)
         {
             battery--;
-            batteryText.text = battery.ToString();
+            batteryText.text = $"Battery: {battery.ToString()}";
             batteryTimer = 0;
         }
 
