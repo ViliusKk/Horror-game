@@ -20,9 +20,10 @@ public class Collection : MonoBehaviour
         {
             pagesCollected++;
             pagesCollectedText.text = $"Pages collected: {pagesCollected.ToString()}";
-            collision.gameObject.SetActive(false);
+            collision.gameObject.SetActive(false); // the page disappears once collected
             enemy.HarderAI(pagesCollected);
 
+            // collecting a page charges the flashlight
             flashlight.battery += 10;
             flashlight.batteryText.text = $"Battery: {flashlight.battery.ToString()}";
         }

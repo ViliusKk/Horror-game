@@ -14,8 +14,6 @@ public class Enemy : MonoBehaviour
     NavMeshAgent agent;
     Vector3 randomDestination;
 
-    float timer;
-
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -37,9 +35,6 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime;
-        //agent.SetDestination(target.position);
-
         float distance = Vector3.Distance(transform.position, target.position);
 
 
@@ -75,7 +70,7 @@ public class Enemy : MonoBehaviour
 
     public void HarderAI(int pagesCollected)
     {
-        print(pagesCollected);
+        // Difficulty increases by: increasing enemy's view distance, patrol distance and movement speed.
         if (pagesCollected == 1)
         {
             viewDistance = 20;
