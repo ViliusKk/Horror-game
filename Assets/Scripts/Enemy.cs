@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     public int scareDistance = 3;
     public Transform target;
     public Image scaryImage;
-    public int viewDistance = 10;
+    public int viewDistance = 5;
     public int patrolDistance = 5;
     NavMeshAgent agent;
     Vector3 randomDestination;
@@ -70,5 +70,28 @@ public class Enemy : MonoBehaviour
     void Jumpscare()
     {
         scaryImage.gameObject.SetActive(true);
+    }
+
+    int countCollects = 0;
+    public void HarderAI()
+    {
+        countCollects++;
+        if (countCollects == 1)
+        {
+            viewDistance *= 2;
+            patrolDistance *= 2;
+        }
+        else if(countCollects == 2)
+        {
+
+        }
+        else if(countCollects == 3)
+        {
+
+        }
+        else
+        {
+
+        }
     }
 }
