@@ -6,6 +6,7 @@ using UnityEngine;
 public class Collection : MonoBehaviour
 {
     public Enemy enemy;
+    public FirstPersonMovement player;
     public Flashlight flashlight;
     public int pagesCollected = 0;
     public TMP_Text pagesCollectedText;
@@ -27,5 +28,6 @@ public class Collection : MonoBehaviour
             flashlight.battery += 10;
             flashlight.batteryText.text = $"Battery: {flashlight.battery.ToString()}";
         }
+        if (pagesCollected == 2) player.canRun = true; // lets the player sprint when 2 or more pages are collected
     }
 }
