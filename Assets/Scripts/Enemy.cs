@@ -38,23 +38,8 @@ public class Enemy : MonoBehaviour
         float distance = Vector3.Distance(transform.position, target.position);
 
 
-        if (distance <= viewDistance)
-        {
-            agent.SetDestination(target.position);
-        }
-        else
-        {
-            agent.SetDestination(randomDestination);
-            //if(timer >= 3)
-            //{
-            //    timer = 0;
-            //    float ranX = Random.Range(-5f, 5f);
-            //    float ranY = Random.Range(-5f, 5f);
-
-            //    Vector3 ranPos = new Vector3(transform.position.x - ranX, transform.position.y - ranY, 0);
-            //    agent.SetDestination(ranPos);
-            //}
-        }
+        if (distance <= viewDistance) agent.SetDestination(target.position);
+        else agent.SetDestination(randomDestination);
 
         if (distance < scareDistance)
         {
